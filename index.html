@@ -1,181 +1,375 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
+<!-- ==========================================================================
+     ABERTURA DO <head>
+     ========================================================================== -->
 <head>
-    <!-- ========================================== -->
-    <!-- PREPARAÇÃO PARA O GOOGLE TAG MANAGER (GTM) -->
-    <!-- ========================================== -->
-    <!-- Cole o snippet de HEAD do GTM logo abaixo desta linha -->
-    
-    <!-- FIM DO SNIPPET DO GTM (HEAD) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pluvia Analytics | Clima de dados para o seu negócio</title>
+  <meta name="description" content="Landing page pedagógica com dataLayer padronizado e sanitizado.">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masterclass: Cultura Data-Driven | DP6 Style</title>
-    
-    <style>
-        /* ========================================== */
-        /* DESIGN SYSTEM & ESTILOS (Inspiração DP6)   */
-        /* ========================================== */
-        :root {
-            --primary-blue: #002554; /* Azul escuro corporativo */
-            --accent-cyan: #00A7E1;  /* Ciano de destaque tecnológico */
-            --bg-light: #F4F7F6;     /* Fundo cinza/azulado claro */
-            --text-dark: #333333;
-            --white: #FFFFFF;
-        }
+  <!-- ======================================================================
+       >>> INÍCIO DO ESPAÇO RESERVADO: GTM (SNIPPET DO <head>) <<<
+       Cole aqui o snippet do Google Tag Manager (script com GTM-XXXXXXX).
+       Ele deve ficar o mais alto possível dentro do <head>.
+       O dataLayer deste arquivo é inicializado de forma segura
+       (window.dataLayer = window.dataLayer || []), então a ordem não quebra.
+       >>> FIM DO ESPAÇO RESERVADO: GTM (SNIPPET DO <head>) <<<
+       ====================================================================== -->
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
+  <style>
+    /* ====================================================================
+       DESIGN SYSTEM (inspirado na identidade da DP6: azul, limpo, tech)
+       ==================================================================== */
+    :root {
+      --navy: #0b1f4b;       /* títulos, hero, footer */
+      --blue: #1e5bff;       /* ação principal */
+      --blue-dark: #1445c4;  /* hover */
+      --cyan: #00c2ff;       /* destaque pontual */
+      --ice: #f2f6ff;        /* fundos de seção */
+      --ink: #1c2540;        /* texto */
+      --muted: #5b6785;      /* texto secundário */
+      --line: #d9e2f5;
+      --white: #ffffff;
+      --radius: 10px;
+      --font: "Poppins", "Segoe UI", Arial, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: var(--font); color: var(--ink); background: var(--white); line-height: 1.6; }
+    img, svg { max-width: 100%; }
+    a { color: var(--blue); }
+    :focus-visible { outline: 3px solid var(--cyan); outline-offset: 2px; }
+    .container { width: min(1120px, 100% - 40px); margin-inline: auto; }
 
-        /* Tipografia */
-        h1, h2, h3 { color: var(--primary-blue); }
-        a { text-decoration: none; color: var(--accent-cyan); font-weight: bold; }
-        a:hover { text-decoration: underline; }
+    /* Botões */
+    .btn {
+      display: inline-block; padding: 12px 24px; border-radius: var(--radius);
+      font: 600 15px var(--font); text-decoration: none; cursor: pointer;
+      border: 2px solid var(--blue); background: var(--blue); color: var(--white);
+      transition: background .2s, border-color .2s;
+    }
+    .btn:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
+    .btn--ghost { background: transparent; color: var(--white); border-color: var(--white); }
+    .btn--ghost:hover { background: rgba(255,255,255,.12); border-color: var(--white); }
+    .btn--small { padding: 8px 18px; font-size: 14px; }
 
-        /* Estrutura Principal */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    /* Header */
+    .site-header { position: sticky; top: 0; z-index: 10; background: var(--white); border-bottom: 1px solid var(--line); }
+    .site-header .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; flex-wrap: wrap; }
+    .logo { font-weight: 700; font-size: 20px; color: var(--navy); text-decoration: none; }
+    .logo span { color: var(--blue); }
+    .nav { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .nav a:not(.btn) { color: var(--ink); text-decoration: none; font-weight: 500; font-size: 15px; }
+    .nav a:not(.btn):hover { color: var(--blue); }
 
-        /* Header */
-        header {
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    /* Hero */
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, #12378a 100%); color: var(--white); padding: 88px 0; }
+    .hero .container { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
+    .hero h1 { font-size: clamp(32px, 5vw, 52px); line-height: 1.12; margin: 0 0 20px; }
+    .hero p { font-size: 18px; max-width: 52ch; color: #d3defa; margin: 0 0 32px; }
+    .hero__actions { display: flex; gap: 14px; flex-wrap: wrap; }
 
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
+    /* Formulário */
+    .lead-card { background: var(--white); color: var(--ink); border-radius: 16px; padding: 28px; box-shadow: 0 20px 50px rgba(0,0,0,.25); }
+    .lead-card h2 { margin: 0 0 6px; font-size: 22px; color: var(--navy); }
+    .lead-card > p { margin: 0 0 18px; font-size: 14px; color: var(--muted); }
+    label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 14px; }
+    input { width: 100%; margin-top: 6px; padding: 11px 12px; border: 1.5px solid var(--line); border-radius: 8px; font: 400 15px var(--font); }
+    input:focus { border-color: var(--blue); outline: none; box-shadow: 0 0 0 3px rgba(30,91,255,.18); }
+    .lead-card .btn { width: 100%; }
+    .form-msg { margin: 12px 0 0; font-size: 14px; min-height: 22px; }
+    .form-msg.erro { color: #c0262d; }
+    .form-msg.ok { color: #12794a; }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--primary-blue);
-            letter-spacing: -1px;
-        }
-        .logo span { color: var(--accent-cyan); }
+    /* Serviços */
+    .section { padding: 80px 0; }
+    .section--ice { background: var(--ice); }
+    .section h2.title { font-size: clamp(26px, 3.5vw, 36px); color: var(--navy); margin: 0 0 12px; }
+    .section .lead { color: var(--muted); max-width: 60ch; margin: 0 0 40px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .card { background: var(--white); border: 1px solid var(--line); border-top: 4px solid var(--blue); border-radius: var(--radius); padding: 28px; }
+    .card h3 { margin: 0 0 8px; color: var(--navy); font-size: 19px; }
+    .card p { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
+    .card a { font-weight: 600; text-decoration: none; }
+    .card a:hover { text-decoration: underline; }
 
-        nav ul { display: flex; list-style: none; gap: 30px; }
-        nav a { color: var(--text-dark); font-weight: 600; }
-        nav a:hover { color: var(--accent-cyan); text-decoration: none; }
+    /* Footer */
+    .site-footer { background: var(--navy); color: #b9c6e8; padding: 48px 0 28px; }
+    .site-footer .container { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center; }
+    .site-footer a { color: var(--white); text-decoration: none; margin-right: 18px; }
+    .site-footer a:hover { text-decoration: underline; }
+    .site-footer small { display: block; width: 100%; margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.15); }
 
-        .btn {
-            background-color: var(--accent-cyan);
-            color: var(--white);
-            padding: 12px 24px;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .btn:hover { background-color: #008CBE; text-decoration: none; }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #004080 100%);
-            color: var(--white);
-            padding: 100px 20px;
-            text-align: center;
-        }
-        .hero h1 { color: var(--white); font-size: 48px; margin-bottom: 20px; }
-        .hero p { font-size: 20px; margin-bottom: 40px; font-weight: 300; }
-
-        /* Seção de Serviços/Diferenciais */
-        .services { padding: 80px 20px; background-color: var(--white); text-align: center; }
-        .services h2 { margin-bottom: 50px; font-size: 36px; }
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { padding: 40px 20px; background: var(--bg-light); border-radius: 8px; border-top: 4px solid var(--accent-cyan); }
-        .card h3 { margin-bottom: 15px; font-size: 22px; }
-
-        /* Formulário de Lead */
-        .lead-section { padding: 80px 20px; text-align: center; }
-        .lead-section h2 { margin-bottom: 20px; }
-        .form-container {
-            background-color: var(--white);
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            text-align: left;
-        }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary-blue); }
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        .form-group input:focus { outline: none; border-color: var(--accent-cyan); }
-        .btn-submit { width: 100%; font-size: 18px; }
-
-        /* Footer */
-        footer { background-color: var(--primary-blue); color: var(--white); padding: 40px 20px; text-align: center; }
-        footer a { color: var(--accent-cyan); }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            nav ul { display: none; } /* Simplificado para mobile */
-            .hero h1 { font-size: 36px; }
-        }
-    </style>
+    /* Responsivo */
+    @media (max-width: 860px) {
+      .hero .container, .grid { grid-template-columns: 1fr; }
+      .hero { padding: 56px 0; }
+      .section { padding: 56px 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+  </style>
 </head>
+<!-- ==========================================================================
+     FECHAMENTO DO </head>
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     ABERTURA DO <body>
+     ========================================================================== -->
 <body>
-    <!-- ========================================== -->
-    <!-- PREPARAÇÃO PARA O GOOGLE TAG MANAGER (GTM) -->
-    <!-- ========================================== -->
-    <!-- Cole o snippet de BODY (noscript) do GTM logo abaixo desta linha -->
-    
-    <!-- FIM DO SNIPPET DO GTM (BODY) -->
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="logo">Data<span>Master</span></div>
-            <nav>
-                <ul>
-                    <li><a href="#sobre">Sobre o Curso</a></li>
-                    <li><a href="#modulos">Módulos</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                </ul>
-            </nav>
-            <a href="#inscricao" class="btn">Garantir Vaga</a>
-        </div>
-    </header>
+  <!-- ======================================================================
+       >>> INÍCIO DO ESPAÇO RESERVADO: GTM (SNIPPET <noscript> DO <body>) <<<
+       Cole aqui o <noscript><iframe ...></iframe></noscript> do GTM.
+       Deve ser o PRIMEIRO elemento logo após a abertura do <body>.
+       >>> FIM DO ESPAÇO RESERVADO: GTM (SNIPPET <noscript> DO <body>) <<<
+       ====================================================================== -->
 
-    <!-- Hero Section -->
+  <!-- ======================= ABERTURA DO <header> ========================= -->
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="#topo">Pluvia<span>.</span>Analytics</a>
+      <nav class="nav" aria-label="Principal">
+        <!-- Links comuns: custom_type = "link" (automático) -->
+        <a href="#servicos">Serviços</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <!-- Botão dentro do <header>: custom_type = "botao-header" (automático) -->
+        <a class="btn btn--small" href="#contato">Falar com especialista</a>
+      </nav>
+    </div>
+  </header>
+  <!-- ======================= FECHAMENTO DO </header> ====================== -->
+
+  <main id="topo">
+
+    <!-- HERO -->
     <section class="hero">
-        <div class="container">
-            <h1>Cultura Data-Driven na Prática</h1>
-            <p>Aprenda a transformar dados brutos em decisões estratégicas de alto impacto para o seu negócio.</p>
-            <a href="#inscricao" class="btn" style="font-size: 18px; padding: 15px 40px;">Inscreva-se Agora</a>
+      <div class="container">
+        <div>
+          <h1>Preveja o clima do seu negócio com dados em que você confia.</h1>
+          <p>Assim como uma estação meteorológica transforma sensores em previsão, a Pluvia transforma cliques, vendas e campanhas em decisões claras.</p>
+          <div class="hero__actions">
+            <!-- Botões fora de header/footer: custom_type = "botao" -->
+            <a class="btn" href="#contato">Quero minha previsão</a>
+            <a class="btn btn--ghost" href="#servicos">Conhecer serviços</a>
+          </div>
         </div>
+
+        <!-- FORMULÁRIO DE LEADS (novalidate: a validação é feita no JS para controlar o dataLayer) -->
+        <div class="lead-card" id="contato">
+          <h2>Receba um diagnóstico gratuito</h2>
+          <p>Preencha todos os campos para falar com a nossa equipe.</p>
+          <form id="form-lead" novalidate>
+            <label>Nome
+              <input type="text" name="nome" autocomplete="name" placeholder="Seu nome completo" required>
+            </label>
+            <label>E-mail
+              <input type="email" name="email" autocomplete="email" placeholder="voce@empresa.com" required>
+            </label>
+            <label>Cargo / Empresa
+              <input type="text" name="cargo_empresa" autocomplete="organization-title" placeholder="Ex.: Analista de Marketing / Acme" required>
+            </label>
+            <!-- type="submit" é IGNORADO pelo listener de clique; o dataLayer "submit" nasce no evento 'submit' -->
+            <button class="btn" type="submit">Enviar</button>
+            <p class="form-msg" id="form-msg" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
     </section>
 
-    <!-- Seção de Diferenciais / Serviços -->
-    <section class="services" id="sobre">
-        <div class="container">
-            <h2>Por que participar
+    <!-- SERVIÇOS -->
+    <section class="section" id="servicos">
+      <div class="container">
+        <h2 class="title">Serviços para cada tipo de tempo</h2>
+        <p class="lead">Da coleta ao insight, cuidamos de toda a jornada dos seus dados.</p>
+        <div class="grid">
+          <article class="card">
+            <h3>Medição e Tag Management</h3>
+            <p>Planejamos e implementamos o rastreamento com GTM e dataLayer padronizado.</p>
+            <a href="#contato">Saiba mais sobre medição</a>
+          </article>
+          <article class="card">
+            <h3>Data Lake e Engenharia</h3>
+            <p>Organizamos dados de várias fontes em uma base única, segura e pronta para análise.</p>
+            <a href="#contato">Saiba mais sobre engenharia</a>
+          </article>
+          <article class="card">
+            <h3>Dashboards e Insights</h3>
+            <p>Painéis claros que mostram o que está funcionando e onde investir o próximo real.</p>
+            <a href="#contato">Saiba mais sobre dashboards</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIFERENCIAIS -->
+    <section class="section section--ice" id="diferenciais">
+      <div class="container">
+        <h2 class="title">Por que escolher a Pluvia</h2>
+        <p class="lead">Método simples, dados auditáveis e entrega que vira rotina na sua equipe.</p>
+        <div class="grid">
+          <article class="card">
+            <h3>Padrão único</h3>
+            <p>Todo clique segue o mesmo modelo de evento, sem acento, em minúsculas e com hífen.</p>
+          </article>
+          <article class="card">
+            <h3>Ensino na prática</h3>
+            <p>Documentamos cada decisão para o seu time aprender e evoluir sozinho.</p>
+          </article>
+          <article class="card">
+            <h3>Dados confiáveis</h3>
+            <p>Validamos cada disparo antes de publicar, para você analisar sem medo.</p>
+          </article>
+        </div>
+        <p style="margin-top:32px"><a class="btn" href="#contato">Começar agora</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================= ABERTURA DO <footer> ========================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div>
+        <a href="#topo">Voltar ao topo</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#privacidade">Política de privacidade</a>
+      </div>
+      <!-- Botão dentro do <footer>: custom_type = "botao-footer" (automático) -->
+      <a class="btn btn--ghost btn--small" href="#contato">Falar com a equipe</a>
+      <small>© 2026 Pluvia Analytics. Marca fictícia criada para fins pedagógicos.</small>
+    </div>
+  </footer>
+  <!-- ======================= FECHAMENTO DO </footer> ====================== -->
+
+  <script>
+  /* ========================================================================
+     DATALAYER PEDAGÓGICO
+     ------------------------------------------------------------------------
+     Padrão de saída de TODO evento:
+       {
+         event:          'clique',
+         custom_section: nome da página (ex.: lp-home),
+         custom_type:    tipo do elemento (botao, botao-header, botao-footer, link, submit),
+         custom_title:   nome/texto do elemento
+       }
+     Todos os valores passam por sanitize(): minúsculas, sem acentos,
+     sem caracteres especiais e com hífen no lugar de espaços.
+     ======================================================================== */
+
+  // Garante que o dataLayer exista, mesmo que o GTM ainda não tenha carregado.
+  window.dataLayer = window.dataLayer || [];
+
+  // Nome da página (custom_section). Altere aqui ao reutilizar o arquivo.
+  var PAGE_SECTION = 'lp-home';
+
+  /* ---- 1) SANITIZAÇÃO ---------------------------------------------------
+     "Botão Falar  com Especialista!" -> "botao-falar-com-especialista"      */
+  function sanitize(value) {
+    return String(value == null ? '' : value)
+      .normalize('NFD')                  // separa letras de seus acentos (é -> e + ´)
+      .replace(/[\u0300-\u036f]/g, '')   // remove os acentos
+      .toLowerCase()                     // caixa baixa
+      .replace(/[^a-z0-9]+/g, '-')       // qualquer sequência fora de a-z/0-9 (espaço, símbolo) vira "-"
+      .replace(/^-+|-+$/g, '');          // tira hífens soltos no início/fim
+  }
+
+  /* ---- 2) FUNÇÃO ÚNICA DE DISPARO ---------------------------------------
+     Centraliza o push: assim o padrão nunca diverge entre os eventos.      */
+  function pushClique(type, title) {
+    window.dataLayer.push({
+      'event': 'clique',                       // nome fixo do evento
+      'custom_section': sanitize(PAGE_SECTION),
+      'custom_type': sanitize(type),
+      'custom_title': sanitize(title)
+    });
+  }
+
+  /* ---- 3) CLASSIFICAÇÃO DO ELEMENTO -------------------------------------
+     Regra automática:
+       <a> sem classe .btn            -> "link"
+       <button> ou <a class="btn">    -> "botao"
+         + dentro de <header>         -> "botao-header"
+         + dentro de <footer>         -> "botao-footer"
+     Dá para forçar manualmente com data-dl-type / data-dl-title.           */
+  function getType(el) {
+    if (el.dataset.dlType) return el.dataset.dlType;
+    var isButton = el.tagName === 'BUTTON' || el.classList.contains('btn');
+    if (!isButton) return 'link';
+    if (el.closest('header')) return 'botao-header';
+    if (el.closest('footer')) return 'botao-footer';
+    return 'botao';
+  }
+
+  function getTitle(el) {
+    return el.dataset.dlTitle || el.getAttribute('aria-label') || el.textContent;
+  }
+
+  /* ---- 4) CAPTURA DE CLIQUES (delegação de eventos) ---------------------
+     Um único listener no document escuta todos os cliques. O closest()
+     sobe da área clicada até o <a href> ou <button> mais próximo.          */
+  document.addEventListener('click', function (event) {
+    var el = event.target.closest('a[href], button');
+    if (!el) return;
+
+    // O botão de envio NÃO dispara aqui: clicar nele não garante que o
+    // formulário foi preenchido. O evento "submit" é tratado abaixo.
+    if (el.type === 'submit') return;
+
+    pushClique(getType(el), getTitle(el));
+  });
+
+  /* ---- 5) ENVIO DO FORMULÁRIO -------------------------------------------
+     REGRA IMPORTANTE: só dispara o dataLayer se TODOS os campos estiverem
+     preenchidos (e o e-mail válido). Caso contrário, nada é enviado.       */
+  var form = document.getElementById('form-lead');
+  var msg = document.getElementById('form-msg');
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault(); // demo pedagógica: não recarrega a página
+
+    var fields = form.querySelectorAll('input[required]');
+    var allFilled = true;
+
+    fields.forEach(function (input) {
+      // trim() impede que apenas espaços contem como "preenchido"
+      if (input.value.trim() === '') allFilled = false;
+    });
+
+    var emailOk = form.elements['email'].checkValidity(); // valida o formato do e-mail
+
+    if (!allFilled || !emailOk) {
+      // Validação falhou: mostra erro e NÃO faz push no dataLayer.
+      msg.className = 'form-msg erro';
+      msg.textContent = 'Preencha todos os campos corretamente para enviar.';
+      return;
+    }
+
+    // Tudo certo: dispara o evento no padrão, com type "submit".
+    pushClique('submit', 'enviar-formulario-lead');
+
+    msg.className = 'form-msg ok';
+    msg.textContent = 'Recebemos seus dados. Entraremos em contato em breve!';
+    form.reset();
+  });
+
+  /* ---- 6) COMO TESTAR ----------------------------------------------------
+     Abra o Console e digite: dataLayer
+     Exemplo de saída ao clicar em "Falar com especialista" (header):
+       { event: 'clique', custom_section: 'lp-home',
+         custom_type: 'botao-header', custom_title: 'falar-com-especialista' }
+     ======================================================================== */
+  </script>
+</body>
+<!-- ==========================================================================
+     FECHAMENTO DO </body>
+     ========================================================================== -->
+</html>
