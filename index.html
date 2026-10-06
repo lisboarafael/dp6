@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- ========================================== -->
+    <!-- PREPARAÇÃO PARA O GOOGLE TAG MANAGER (GTM) -->
+    <!-- ========================================== -->
+    <!-- Cole o snippet de HEAD do GTM logo abaixo desta linha -->
+    
+    <!-- FIM DO SNIPPET DO GTM (HEAD) -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass: Cultura Data-Driven | DP6 Style</title>
+    
+    <style>
+        /* ========================================== */
+        /* DESIGN SYSTEM & ESTILOS (Inspiração DP6)   */
+        /* ========================================== */
+        :root {
+            --primary-blue: #002554; /* Azul escuro corporativo */
+            --accent-cyan: #00A7E1;  /* Ciano de destaque tecnológico */
+            --bg-light: #F4F7F6;     /* Fundo cinza/azulado claro */
+            --text-dark: #333333;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Tipografia */
+        h1, h2, h3 { color: var(--primary-blue); }
+        a { text-decoration: none; color: var(--accent-cyan); font-weight: bold; }
+        a:hover { text-decoration: underline; }
+
+        /* Estrutura Principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            letter-spacing: -1px;
+        }
+        .logo span { color: var(--accent-cyan); }
+
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav a { color: var(--text-dark); font-weight: 600; }
+        nav a:hover { color: var(--accent-cyan); text-decoration: none; }
+
+        .btn {
+            background-color: var(--accent-cyan);
+            color: var(--white);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover { background-color: #008CBE; text-decoration: none; }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #004080 100%);
+            color: var(--white);
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .hero h1 { color: var(--white); font-size: 48px; margin-bottom: 20px; }
+        .hero p { font-size: 20px; margin-bottom: 40px; font-weight: 300; }
+
+        /* Seção de Serviços/Diferenciais */
+        .services { padding: 80px 20px; background-color: var(--white); text-align: center; }
+        .services h2 { margin-bottom: 50px; font-size: 36px; }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { padding: 40px 20px; background: var(--bg-light); border-radius: 8px; border-top: 4px solid var(--accent-cyan); }
+        .card h3 { margin-bottom: 15px; font-size: 22px; }
+
+        /* Formulário de Lead */
+        .lead-section { padding: 80px 20px; text-align: center; }
+        .lead-section h2 { margin-bottom: 20px; }
+        .form-container {
+            background-color: var(--white);
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: left;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary-blue); }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .form-group input:focus { outline: none; border-color: var(--accent-cyan); }
+        .btn-submit { width: 100%; font-size: 18px; }
+
+        /* Footer */
+        footer { background-color: var(--primary-blue); color: var(--white); padding: 40px 20px; text-align: center; }
+        footer a { color: var(--accent-cyan); }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            nav ul { display: none; } /* Simplificado para mobile */
+            .hero h1 { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================== -->
+    <!-- PREPARAÇÃO PARA O GOOGLE TAG MANAGER (GTM) -->
+    <!-- ========================================== -->
+    <!-- Cole o snippet de BODY (noscript) do GTM logo abaixo desta linha -->
+    
+    <!-- FIM DO SNIPPET DO GTM (BODY) -->
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">Data<span>Master</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#sobre">Sobre o Curso</a></li>
+                    <li><a href="#modulos">Módulos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <a href="#inscricao" class="btn">Garantir Vaga</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Cultura Data-Driven na Prática</h1>
+            <p>Aprenda a transformar dados brutos em decisões estratégicas de alto impacto para o seu negócio.</p>
+            <a href="#inscricao" class="btn" style="font-size: 18px; padding: 15px 40px;">Inscreva-se Agora</a>
+        </div>
+    </section>
+
+    <!-- Seção de Diferenciais / Serviços -->
+    <section class="services" id="sobre">
+        <div class="container">
+            <h2>Por que participar
